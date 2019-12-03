@@ -50,7 +50,12 @@ function deleteProductById(req, res) {
 function addProduct(req, res) {
     var payload = req.body
     // #9 Add a new product 
+    product.save(function (err){
 
+        if (err) res.status(500.).json(err);
+        res.json({statis: "Added a product"}); 
+    
+        });
     // ===============================
 }
 
