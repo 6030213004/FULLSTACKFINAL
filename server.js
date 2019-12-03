@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // #3 Serve static content in folder frontend
-app.use(express.static("www"));
+app.use(express.static("frontend"));
 // ===============================
 
 
@@ -37,58 +37,14 @@ router.get('/products', products.getAllProducts);
 router.get('/products/:pid', products.getProductById);
 
 // #4 Complete the routing for POST, PUT, DELETE
-app.post('/api/products', function (req, res) {
+var router = express.Router();
 
-    //Insert data to mongodb
-    var newproduct = req.body;
-    var product = new Product(newproduct);
-    
-    product.save(function (err){
-
-    if (err) res.status(500.).json(err);
-    res.json({statis: "Added a product"}); 
-
-    });
-
-});
-
-    app.get('/api/products', function(req, res) {
-    Product.find(function(err, products) {
-        if (err) res.status(500).json(err);
-        res.json(products);
-    });
-});
-
-
-    app.get('/api/products/:id', function(req, res) {
-        var id = req.params.id;
-        Product.find({"_id":id},function(err, products) {
-            if (err) res.status(500).json(err);
-            res.json(products);
-    });
-});
-
-    app.put('/api/products/:id', function(req, res) {
-        var id = req.params.id;
-        var updateproduct = req.body;
-
-        Product.findByIdAndUpdate(id, updateproduct, function(err){
-            if (err) res.status(500).json(err);
-            res.json({status: "Updated a product"})
-        }) 
-
-});
-
-app.delete('/api/products/:id', function(req, res) {
-    var id = req.params.id;
-    var updateproduct = req.body;
-
-    Product.findByIdAndRemove(id, function(err){
-        if (err) res.status(500).json(err);
-        res.json({status: "Deleted a product"})
-    }) 
-
-});
+var products = require('./api');
+router.get('/products',products.getAllProducts);
+router.get('/products/:pid',products.getProductByID);
+router.post('/products',products.addProduct);
+router.put('/products/:pid',products.updateProductByID);
+router.delete('/products/:pid',products.deleteProductByID);
 // ===============================
 
 
