@@ -9,7 +9,9 @@ $(function () {
         $("#plist").empty();
         // #12 Get all products and display as a table
         // use $.get
-
+        $("input").keyup(function(){
+            var txt =
+        })
         // ===============================
     }
     
