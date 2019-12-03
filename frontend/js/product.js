@@ -10,7 +10,7 @@ $(function () {
         // #12 Get all products and display as a table
         // use $.get
         $("input").keyup(function(){
-            var txt =
+            var txt = $
         })
         // ===============================
     }
@@ -32,7 +32,9 @@ $(function () {
 
         // #13 Add new products by calling api
         // use $.post
-
+        $.post(url, function(newproduct, status){
+            alert("Data: " + newproduct + "\nStatus: " + status);
+          });
         // ===============================
 
     });
