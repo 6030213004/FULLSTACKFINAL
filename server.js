@@ -3,14 +3,14 @@
 var express = require('express');
 // ===============================
 
-var app = express();   
-var cors = require('cors');       
+var app = express();
+var cors = require('cors');
 
 // #2 Add body-parser package to the app
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-extended: true
+    extended: true
 }));
 // ===============================
 
@@ -26,7 +26,7 @@ app.use(express.static("frontend"));
 // ===============================
 
 
-var port = process.env.PORT || 8080; 
+var port = process.env.PORT || 8080;
 
 // ROUTES FOR OUR API
 // =============================================================================
@@ -37,14 +37,13 @@ router.get('/products', products.getAllProducts);
 router.get('/products/:pid', products.getProductById);
 
 // #4 Complete the routing for POST, PUT, DELETE
-var router = express.Router();
 
 var products = require('./api');
-router.get('/products',products.getAllProducts);
-router.get('/products/:pid',products.getProductByID);
-router.post('/products',products.addProduct);
-router.put('/products/:pid',products.updateProductByID);
-router.delete('/products/:pid',products.deleteProductByID);
+router.get('/products', products.getAllProducts);
+router.get('/products/:pid', products.getProductById);
+router.post('/products', products.addProduct);
+router.put('/products/:pid', products.updateProductById);
+router.delete('/products/:pid', products.deleteProductById);
 // ===============================
 
 
@@ -54,6 +53,6 @@ app.use('/api', cors(), router);
 
 // #10 Start the server
 app.listen(port, function () {
-// ===============================
-console.log('Magic happens on http://localhost:' + port);
+    // ===============================
+    console.log('Magic happens on http://localhost:' + port);
 });
